@@ -1,0 +1,7 @@
+// Version: 1.0.0
+type List<T> = ?(T, List<T>);
+type User = {id : Text; name : Text; subscriptions : List<Text>};
+actor {
+  stable var currentValue : Nat;
+  stable var users : ?(User, List<User>)
+};
