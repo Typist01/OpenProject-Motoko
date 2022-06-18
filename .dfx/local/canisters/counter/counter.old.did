@@ -1,3 +1,62 @@
+type User = 
+ record {
+   name: text;
+   subscriptions: List;
+ };
+type Task = 
+ record {
+   aim: text;
+   prerequisites: List_3;
+   submissions: List_4;
+   title: text;
+ };
+type Submission = 
+ record {
+   responses: List_3;
+   title: text;
+ };
+type Project = 
+ record {
+   founder: User;
+   name: text;
+   tasks: List_2;
+ };
+type List_4 = 
+ opt record {
+       Submission;
+       List_4;
+     };
+type List_3 = 
+ opt record {
+       text;
+       List_3;
+     };
+type List_2 = 
+ opt record {
+       Task;
+       List_2;
+     };
+type List_1 = 
+ opt record {
+       Project;
+       List_1;
+     };
+type List = 
+ opt record {
+       Community;
+       List;
+     };
+type Community = 
+ record {
+   name: text;
+   projects: List_1;
+   subscribers: List_3;
+ };
 service : {
-  getValue: () -> (nat) query;
+  addCommunity: (text) -> ();
+  createUser: (principal, text) -> () oneway;
+  getCommunities: () -> (List) query;
+  getProjects: (text) -> (List) query;
+  getUserData: (principal) -> (opt User) query;
+  vistorId: () -> (principal);
 }
