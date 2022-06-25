@@ -44,9 +44,6 @@ actor counter {
   private var communities : List.List<Community> = List.List<Community>(0);
 
   
-
-
-
 // get visitor id
   public shared(msg) func vistorId() : async Principal {
       Debug.print(debug_show(msg.caller));
@@ -156,7 +153,6 @@ actor counter {
 // for keeping user hash map in memory
       userEntries := Iter.toArray(users.entries());
 
-      // preupgrade try put buffer data in stable array var
   };
 
   system func postupgrade() {
@@ -164,14 +160,11 @@ actor counter {
     if (users.size() < 1){
       let adminUser : User = {
         name = "admin";
-        subscriptions = List.List<Text>(0);
       };
       users.put(adminPrincipal, adminUser);
     };
     users := HashMap.fromIter<Principal, User>(userEntries.vals(), 1, Principal.equal, Principal.hash);   
   };
-
   // keep nested data from communities in memory
-
-
 };
+
