@@ -1,3 +1,4 @@
+// going back to List implementation
 import Debug "mo:base/Debug";
 import List "mo:base/List";
 import Principal "mo:base/Principal";
@@ -11,26 +12,26 @@ actor counter {
 
   public type Submission = {
     title: Text;
-    responses: Buffer.Buffer<Text>;
+    responses: List.List<Text>;
   };
 // hi
   public type Task = {
       title: Text;
       aim: Text;
-      prerequisites: Buffer.Buffer<Text>;
-      submissions: Buffer.Buffer<Submission>;
+      prerequisites: List.List<Text>;
+      submissions: List.List<Submission>;
   };
 
   public type Project = {
       name: Text;
       founder: User;
-      tasks: Buffer.Buffer<Task>;
+      tasks: List.List<Task>;
   };
 
   public type Community = {
       name: Text;
-      subscribers: Buffer.Buffer<Text>;
-      projects: Buffer.Buffer<Project>;
+      subscribers: List.List<Text>;
+      projects: List.List<Project>;
   };
 
   public type User = {
@@ -40,7 +41,7 @@ actor counter {
 
   private var users = HashMap.HashMap<Principal, User>(1, Principal.equal, Principal.hash);
   private stable var userEntries: [(Principal, User)] = [];
-  private var communities : Buffer.Buffer<Community> = Buffer.Buffer<Community>(0);
+  private var communities : List.List<Community> = List.List<Community>(0);
 
   
 
@@ -76,7 +77,7 @@ actor counter {
 // //   // Debug.print(debug_show(Iter.toList(users.entries())));
 
 //  get list of communities
-  // public query func getCommunities () : async Buffer.Buffer<Community> {
+  // public query func getCommunities () : async List.List<Community> {
   //     return communities;
   // };
 
@@ -163,7 +164,7 @@ actor counter {
     if (users.size() < 1){
       let adminUser : User = {
         name = "admin";
-        subscriptions = Buffer.Buffer<Text>(0);
+        subscriptions = List.List<Text>(0);
       };
       users.put(adminPrincipal, adminUser);
     };
