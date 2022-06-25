@@ -1,5 +1,9 @@
 // Version: 1.0.0
-type User = {name : Text};
+type Community =
+  {name : Text; projects : List<Text>; subscribers : List<Text>};
+type List<T> = ?(T, List<T>);
+type User = {name : Text; subscriptions : List<Text>};
 actor {
+  stable var communities : ?(Community, List<Community>);
   stable var userEntries : [(Principal, User)]
 };

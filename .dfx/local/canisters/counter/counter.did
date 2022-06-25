@@ -1,6 +1,30 @@
-type User = record {name: text;};
+type User = 
+ record {
+   name: text;
+   subscriptions: List;
+ };
+type List_1 = 
+ opt record {
+       Community;
+       List_1;
+     };
+type List = 
+ opt record {
+       text;
+       List;
+     };
+type Community = 
+ record {
+   name: text;
+   projects: List;
+   subscribers: List;
+ };
 service : {
+  addProject: (text, text, opt text, text) -> (text);
+  createCommunity: (text) -> (text);
   createUser: (principal, text) -> (text);
+  findCommunity: (text) -> (opt Community);
+  getCommunities: () -> (List_1) query;
   getUserData: (principal) -> (opt User);
   vistorId: () -> (principal);
 }
